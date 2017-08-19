@@ -1,0 +1,36 @@
+{
+  "name": "task-breaker",
+  "version": "1.0.0",
+  "description": "Breaks big tasks into smaller ones",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuliyaU/task-breaker.git"
+  },
+  "keywords": [
+    "project-management",
+    "react"
+  ],
+  "author": "Yuliya Ulanova",
+  "bugs": {
+    "url": "https://github.com/YuliyaU/task-breaker/issues",
+    "email": "yuliyaulanova0310@gmail.com"
+  },
+  "homepage": "https://github.com/YuliyaU/task-breaker#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-icons": "^2.2.5"
+  }
+}
