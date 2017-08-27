@@ -16,13 +16,26 @@ var insertDocuments = function(db, callback) {
       console.log("Inserted 3 documents into the collection");
       callback(result);
     });
-  }
+  };
+
+  var findDocuments = function(db, callback) {
+    // Get the documents collection
+    var collection = db.collection('documents');
+    // Find some documents
+    collection.find({'a': 3}).toArray(function(err, docs) {      
+      console.log("Found the following records");
+      console.log(docs)
+      callback(docs);
+    });
+  };
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     console.log('Database is created!');
     insertDocuments(db, function() {
-        db.close();
+        findDocuments(db, function() {
+            db.close();
+        });
     });
 });
 
