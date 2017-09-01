@@ -6,6 +6,8 @@ const app = express();
 const port = 3000;
 // const url = 'mongodb://localhost:27017/tasksdb';
 
+app.use(express.static(__dirname + '/src'));
+
 // var insertDocuments = function(db, callback) {
 //     // Get the documents collection
 //     var collection = db.collection('documents');
