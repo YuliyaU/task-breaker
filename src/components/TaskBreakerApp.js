@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import {TaskBreakerForm} from './TaskBreakerForm';
+import {TasksList} from './TasksList';
 
 export class TaskBreakerApp extends Component {
 
@@ -8,6 +9,7 @@ export class TaskBreakerApp extends Component {
             <div>
                 <h1>Task Breaker</h1>
                 <TaskBreakerForm />
+                <TasksList />
             </div>
         );
     }
