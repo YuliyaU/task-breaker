@@ -5,5 +5,6 @@ export const TaskBreakerForm = () => (
         <label htmlFor="add-feature-name">Feature:</label>
         <input type="text" name="add-feature-name" id="add-feature-name"/>
         <AddTask />
+        <button type="submit">Add a task</button>
     </form>
 );
