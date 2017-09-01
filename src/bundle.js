@@ -23384,10 +23384,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Task = exports.Task = function (_Component) {
     _inherits(Task, _Component);
 
-    function Task() {
+    function Task(props) {
         _classCallCheck(this, Task);
 
-        return _possibleConstructorReturn(this, (Task.__proto__ || Object.getPrototypeOf(Task)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Task.__proto__ || Object.getPrototypeOf(Task)).call(this, props));
+
+        _this.state = {
+            taskInfo: {
+                feature: "Display tasks",
+                taskName: "Submit form data to the TasksList"
+            }
+        };
+        return _this;
     }
 
     _createClass(Task, [{
@@ -23399,7 +23407,7 @@ var Task = exports.Task = function (_Component) {
                 React.createElement(
                     'p',
                     null,
-                    'Submit form data to the TasksList'
+                    this.state.taskInfo.taskName
                 ),
                 React.createElement(
                     'button',
