@@ -22451,7 +22451,7 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
             tasks: [{
                 id: 1,
                 taskName: "Task 1",
-                feature: "Display tasks"
+                featureName: "Display tasks"
             }]
         };
         return _this;
@@ -22468,7 +22468,7 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
                     null,
                     'Task Breaker'
                 ),
-                React.createElement(_TaskBreakerForm.TaskBreakerForm, { tasks: this.state.tasks }),
+                React.createElement(_TaskBreakerForm.TaskBreakerForm, null),
                 React.createElement(_TasksList.TasksList, { tasks: this.state.tasks })
             );
         }
@@ -22505,32 +22505,48 @@ var TaskBreakerForm = exports.TaskBreakerForm = function (_Component) {
     function TaskBreakerForm(props) {
         _classCallCheck(this, TaskBreakerForm);
 
-        return _possibleConstructorReturn(this, (TaskBreakerForm.__proto__ || Object.getPrototypeOf(TaskBreakerForm)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (TaskBreakerForm.__proto__ || Object.getPrototypeOf(TaskBreakerForm)).call(this, props));
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
     }
 
     _createClass(TaskBreakerForm, [{
-        key: "render",
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+            console.log(this.featureName.value);
+            console.log(this.taskName.value);
+            console.log('Got the task!');
+        }
+    }, {
+        key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            //const {taskName, feature} = this.props
             return React.createElement(
-                "form",
-                null,
+                'form',
+                { onSubmit: this.handleSubmit },
                 React.createElement(
-                    "label",
-                    { htmlFor: "add-feature-name" },
-                    "Feature:"
+                    'label',
+                    null,
+                    'Feature:'
                 ),
-                React.createElement("input", { type: "text", name: "add-feature-name", id: "add-feature-name" }),
+                React.createElement('input', { type: 'text',
+                    ref: function ref(featureName) {
+                        return _this2.featureName = featureName;
+                    } }),
                 React.createElement(
-                    "label",
-                    { htmlFor: "add-task-name" },
-                    "Task:"
+                    'label',
+                    { htmlFor: 'add_task_name' },
+                    'Task:'
                 ),
-                React.createElement("input", { type: "text", id: "add-task-name", name: "add-task-name" }),
-                React.createElement(
-                    "button",
-                    { type: "submit" },
-                    "Add a task"
-                )
+                React.createElement('input', { type: 'text',
+                    ref: function ref(taskName) {
+                        return _this2.taskName = taskName;
+                    } }),
+                React.createElement('input', { type: 'submit', value: 'Add a task' })
             );
         }
     }]);
