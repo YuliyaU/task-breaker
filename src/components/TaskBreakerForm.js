@@ -1,32 +1,26 @@
-import {Component} from 'react';
-
-export class TaskBreakerForm extends Component {
-    constructor(props) {
-        super(props); 
-
-        this.handleSubmit = this.handleSubmit.bind(this);        
-    }
-
-    handleSubmit(event) {
+export const TaskBreakerForm = ({onNewTask}) => {
+    let _taskName, _featureName
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.featureName.value);
-        console.log(this.taskName.value);
-        console.log('Got the task!');
-        
+        onNewTask({            
+            id: 2,
+            taskName: _featureName.value,
+            featureName: _taskName.value            
+        });
+        // To clear input fields from previous value inputs
+        _taskName.value = '';
+        _featureName.value = '';
     }
 
-    render() {
-        //const {taskName, feature} = this.props
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Feature:</label>
-                <input type="text"                                            
-                       ref={(featureName) => this.featureName = featureName} />
-                <label htmlFor="add_task_name">Task:</label>
-                <input type="text"                                              
-                       ref={(taskName) => this.taskName = taskName} />  
-                <input type="submit" value="Add a task" />
-            </form>
-        );
-    }    
-};
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>Feature:</label>
+            <input type="text"                                            
+                   ref={input => _featureName = input} />
+            <label htmlFor="add_task_name">Task:</label>
+            <input type="text"                                              
+                   ref={input => _taskName = input} />  
+            <input type="submit" value="Add a task" />
+        </form>
+    );
+}

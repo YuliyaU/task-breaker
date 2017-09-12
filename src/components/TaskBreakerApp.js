@@ -14,13 +14,23 @@ export class TaskBreakerApp extends Component {
                 }
             ]
         }
+        this.addNewTask = this.addNewTask.bind(this)
+    }
+
+    addNewTask(newTask) {
+        this.setState({
+            tasks: [
+                ...this.state.tasks,
+                newTask
+            ]
+        })
     }
 
     render() {
         return (
             <div>
                 <h1>Task Breaker</h1>
-                <TaskBreakerForm />
+                <TaskBreakerForm onNewTask={this.addNewTask}/>
                 <TasksList tasks={this.state.tasks}/>
             </div>
         );

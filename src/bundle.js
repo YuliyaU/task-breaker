@@ -22433,6 +22433,8 @@ var _TaskBreakerForm = __webpack_require__(186);
 
 var _TasksList = __webpack_require__(188);
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22454,10 +22456,18 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
                 featureName: "Display tasks"
             }]
         };
+        _this.addNewTask = _this.addNewTask.bind(_this);
         return _this;
     }
 
     _createClass(TaskBreakerApp, [{
+        key: 'addNewTask',
+        value: function addNewTask(newTask) {
+            this.setState({
+                tasks: [].concat(_toConsumableArray(this.state.tasks), [newTask])
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -22468,7 +22478,7 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
                     null,
                     'Task Breaker'
                 ),
-                React.createElement(_TaskBreakerForm.TaskBreakerForm, null),
+                React.createElement(_TaskBreakerForm.TaskBreakerForm, { onNewTask: this.addNewTask }),
                 React.createElement(_TasksList.TasksList, { tasks: this.state.tasks })
             );
         }
@@ -22487,74 +22497,47 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.TaskBreakerForm = undefined;
+var TaskBreakerForm = exports.TaskBreakerForm = function TaskBreakerForm(_ref) {
+    var onNewTask = _ref.onNewTask;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+    var _taskName = void 0,
+        _featureName = void 0;
+    var handleSubmit = function handleSubmit(event) {
+        event.preventDefault();
+        onNewTask({
+            id: 2,
+            taskName: _featureName.value,
+            featureName: _taskName.value
+        });
+        // To clear input fields from previous value inputs
+        _taskName.value = '';
+        _featureName.value = '';
+    };
 
-var _react = __webpack_require__(14);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TaskBreakerForm = exports.TaskBreakerForm = function (_Component) {
-    _inherits(TaskBreakerForm, _Component);
-
-    function TaskBreakerForm(props) {
-        _classCallCheck(this, TaskBreakerForm);
-
-        var _this = _possibleConstructorReturn(this, (TaskBreakerForm.__proto__ || Object.getPrototypeOf(TaskBreakerForm)).call(this, props));
-
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
-        return _this;
-    }
-
-    _createClass(TaskBreakerForm, [{
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            event.preventDefault();
-            console.log(this.featureName.value);
-            console.log(this.taskName.value);
-            console.log('Got the task!');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            //const {taskName, feature} = this.props
-            return React.createElement(
-                'form',
-                { onSubmit: this.handleSubmit },
-                React.createElement(
-                    'label',
-                    null,
-                    'Feature:'
-                ),
-                React.createElement('input', { type: 'text',
-                    ref: function ref(featureName) {
-                        return _this2.featureName = featureName;
-                    } }),
-                React.createElement(
-                    'label',
-                    { htmlFor: 'add_task_name' },
-                    'Task:'
-                ),
-                React.createElement('input', { type: 'text',
-                    ref: function ref(taskName) {
-                        return _this2.taskName = taskName;
-                    } }),
-                React.createElement('input', { type: 'submit', value: 'Add a task' })
-            );
-        }
-    }]);
-
-    return TaskBreakerForm;
-}(_react.Component);
-
-;
+    return React.createElement(
+        'form',
+        { onSubmit: handleSubmit },
+        React.createElement(
+            'label',
+            null,
+            'Feature:'
+        ),
+        React.createElement('input', { type: 'text',
+            ref: function ref(input) {
+                return _featureName = input;
+            } }),
+        React.createElement(
+            'label',
+            { htmlFor: 'add_task_name' },
+            'Task:'
+        ),
+        React.createElement('input', { type: 'text',
+            ref: function ref(input) {
+                return _taskName = input;
+            } }),
+        React.createElement('input', { type: 'submit', value: 'Add a task' })
+    );
+};
 
 /***/ }),
 /* 187 */,
