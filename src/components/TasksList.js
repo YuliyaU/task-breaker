@@ -5,7 +5,7 @@ export class TasksList extends Component {
     render() {
         return (
             <div className="tasks-list">                
-                <Task />                                
+                <Task task={this.props.tasks[0]}/>                                
             </div>
         );
     }
