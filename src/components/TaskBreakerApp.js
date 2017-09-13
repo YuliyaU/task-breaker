@@ -7,8 +7,7 @@ export class TaskBreakerApp extends Component {
         super(props) 
         this.state = {
             tasks: [
-                {
-                    id: 1,
+                {                    
                     taskName: "Task 1",
                     featureName: "Display tasks"
                 }

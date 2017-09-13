@@ -22451,7 +22451,6 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
 
         _this.state = {
             tasks: [{
-                id: 1,
                 taskName: "Task 1",
                 featureName: "Display tasks"
             }]
@@ -22505,7 +22504,6 @@ var TaskBreakerForm = exports.TaskBreakerForm = function TaskBreakerForm(_ref) {
     var handleSubmit = function handleSubmit(event) {
         event.preventDefault();
         onNewTask({
-            id: 2,
             taskName: _taskName.value,
             featureName: _featureName.value
         });

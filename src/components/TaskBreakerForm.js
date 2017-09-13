@@ -2,8 +2,7 @@ export const TaskBreakerForm = ({onNewTask}) => {
     let _taskName, _featureName
     const handleSubmit = (event) => {
         event.preventDefault();
-        onNewTask({            
-            id: 2,
+        onNewTask({                        
             taskName: _taskName.value,
             featureName: _featureName.value            
         });
