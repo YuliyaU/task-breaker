@@ -1,12 +1,21 @@
 const express = require('express');
-// const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
 
 const port = 3000;
-// const url = 'mongodb://localhost:27017/tasksdb';
+const url = 'mongodb://localhost:27017/tasksdb';
 
 app.use(express.static(__dirname + '/src'));
+
+app.get("/api/tasks", function(req, res){    
+  MongoClient.connect(url, function(err, db){
+      db.collection("tasks").find({}).toArray(function(err, tasks){
+          res.send(tasks)
+          db.close();
+      });
+  });
+});
 
 // var insertDocuments = function(db, callback) {
 //     // Get the documents collection
@@ -34,11 +43,12 @@ app.use(express.static(__dirname + '/src'));
 // MongoClient.connect(url, function(err, db) {
 //     if (err) throw err;
 //     console.log('Database is created!');
-//     insertDocuments(db, function() {
-//         findDocuments(db, function() {
-//             db.close();
-//         });
-//     });
+//     // insertDocuments(db, function() {
+//     //     findDocuments(db, function() {
+//     //         db.close();
+//     //     });
+//     // });
+//     db.close();
 // });
 
 app.listen(port, () => {
