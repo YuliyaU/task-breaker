@@ -1,17 +1,13 @@
 import {Component} from 'react';
 import {TaskBreakerForm} from './TaskBreakerForm';
 import {TasksList} from './TasksList';
+import {getTasks} from '../api/tasksApi.js';
 
 export class TaskBreakerApp extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            tasks: [
-                {                    
-                    taskName: "Task 1",
-                    featureName: "Display tasks"
-                }
-            ]
+            tasks: []
         }
         this.addNewTask = this.addNewTask.bind(this)
     }
@@ -24,6 +20,14 @@ export class TaskBreakerApp extends Component {
             ]
         })
     }
+
+    componentDidMount() {
+        getTasks().then(results => {
+            this.setState({
+                tasks: results
+            });
+        });  
+    };
 
     render() {
         return (

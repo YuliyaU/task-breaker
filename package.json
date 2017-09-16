@@ -37,6 +37,7 @@
     "mongodb": "^2.2.31",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-icons": "^2.2.5"
+    "react-icons": "^2.2.5",
+    "whatwg-fetch": "^2.0.3"
   }
 }
