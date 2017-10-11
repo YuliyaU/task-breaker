@@ -1,7 +1,9 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser'); 
 
 const app = express();
+const jsonParser = bodyParser.json();
 
 const port = 3000;
 const url = 'mongodb://localhost:27017/tasksdb';
@@ -17,39 +19,25 @@ app.get("/api/tasks", function(req, res){
   });
 });
 
-// var insertDocuments = function(db, callback) {
-//     // Get the documents collection
-//     var collection = db.collection('documents');
-//     // Insert some documents
-//     collection.insertMany([
-//       {a : 1}, {a : 2}, {a : 3}
-//     ], function(err, result) {      
-//       console.log("Inserted 3 documents into the collection");
-//       callback(result);
-//     });
-//   };
+app.post("/api/tasks", jsonParser, function (req, res) {    
+    if (!req.body) { 
+        return res.sendStatus(400);
+    }
+    var _taskName = req.body.taskName;
+    var _featureName = req.body.featureName;
+    var task = {taskName: _taskName, featureName: _featureName};
+    console.log(task);
 
-//   var findDocuments = function(db, callback) {
-//     // Get the documents collection
-//     var collection = db.collection('documents');
-//     // Find some documents
-//     collection.find({'a': 3}).toArray(function(err, docs) {      
-//       console.log("Found the following records");
-//       console.log(docs)
-//       callback(docs);
-//     });
-//   };
-
-// MongoClient.connect(url, function(err, db) {
-//     if (err) throw err;
-//     console.log('Database is created!');
-//     // insertDocuments(db, function() {
-//     //     findDocuments(db, function() {
-//     //         db.close();
-//     //     });
-//     // });
-//     db.close();
-// });
+    MongoClient.connect(url, function(err, db) {
+        db.collection("tasks").insertOne(task, function(err, result) {
+            if (err) {
+                return res.status(400).send();
+            }
+            res.send(task);
+            db.close();
+        });        
+    });
+});
 
 app.listen(port, () => {
     console.log('We are live on ' + port);

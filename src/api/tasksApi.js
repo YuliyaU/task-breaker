@@ -16,3 +16,17 @@ function onSuccess(response) {
 function onError(error) {
     console.log(error); 
 }
+
+export function createNewTask(_newTask) {
+    var url = baseURL + 'tasks';
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            taskName: _newTask.taskName,
+            featureName: _newTask.featureName
+        })
+    });
+}

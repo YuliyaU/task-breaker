@@ -22461,6 +22461,7 @@ var TaskBreakerApp = exports.TaskBreakerApp = function (_Component) {
     _createClass(TaskBreakerApp, [{
         key: 'addNewTask',
         value: function addNewTask(newTask) {
+            (0, _tasksApi.createNewTask)(newTask);
             this.setState({
                 tasks: [].concat(_toConsumableArray(this.state.tasks), [newTask])
             });
@@ -23381,6 +23382,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getTasks = getTasks;
+exports.createNewTask = createNewTask;
 
 __webpack_require__(196);
 
@@ -23400,6 +23402,20 @@ function onSuccess(response) {
 
 function onError(error) {
     console.log(error);
+}
+
+function createNewTask(_newTask) {
+    var url = baseURL + 'tasks';
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            taskName: _newTask.taskName,
+            featureName: _newTask.featureName
+        })
+    });
 }
 
 /***/ }),

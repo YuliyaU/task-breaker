@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {TaskBreakerForm} from './TaskBreakerForm';
 import {TasksList} from './TasksList';
-import {getTasks} from '../api/tasksApi.js';
+import {getTasks, createNewTask} from '../api/tasksApi.js';
 
 export class TaskBreakerApp extends Component {
     constructor(props) {
@@ -13,12 +13,13 @@ export class TaskBreakerApp extends Component {
     }
 
     addNewTask(newTask) {
+        createNewTask(newTask);
         this.setState({
             tasks: [
                 ...this.state.tasks,
                 newTask
             ]
-        })
+        });        
     }
 
     componentDidMount() {
